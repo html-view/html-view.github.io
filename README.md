@@ -4,110 +4,73 @@ An enhanced version of the HTML Preview project with support for multiple parame
 
 ## Overview
 
-This project is an enhanced version of the [original HTML Preview project](https://github.com/html-preview/html-preview.github.io) that allows rendering HTML files from git repositories (like GitHub, GitLab, BitBucket, etc.) directly in your browser without cloning or downloading the repository.
+This project is an enhanced version of the [HTML Preview project](https://github.com/html-preview/html-preview.github.io) that allows rendering HTML files from git repositories (like GitHub, GitLab, BitBucket, etc.) or URL's directly in your browser without cloning or downloading the repository.
 
 The enhanced version adds support for multiple parameters that allow customizing the preview experience.
 
-## Features
+<!--
+SPDX-FileCopyrightText: 2012 - 2021 Jerzy Głowacki <jerzyglowacki@gmail.com>
+SPDX-FileCopyrightText: 2024 Robin Vobruba <hoijui.quaero@gmail.com>
 
-- Preview HTML files from various git forges (GitHub, GitLab, BitBucket, etc.)
-- Apply custom themes (light/dark)
-- Inject custom CSS and JavaScript
-- Configure display settings (width, height, scale)
-- Control security features (sandbox mode, script removal)
-- Manage caching behavior
+SPDX-License-Identifier: Apache-2.0
+-->
 
-## Parameters
+> [!warning]
+> Freely hosted [CORS][CORS] (Cross-origin resource sharing) proxies -
+like the ones used by this script -
+are a potential **security risk!**
 
-The following parameters are supported:
+> [!warning]
+> If a script stores sensitive data (as cookie, `localStorage`, etc...), then **other repos you open will also have access** to this data.
+> 
+> How to avoid risk:
+> - Don't input sensitive data while previewing
+> - Clear all site data after previewing a repo
 
-### Basic Parameter
+Currently supported git forges:
 
-- `url` - The URL of the HTML file to preview (required)
+- [x] GitHub
+- [x] BitBucket
+- [x] GitLab
+  - [x] gitlab.com
+  - [x] lab.allmende.io
+  - [x] gitlab.opensourceecology.de
+- [x] ForgeJo
+  - [x] codeberg.org
+- [x] SourceHut
+- [ ] Gitea
 
-### Theme & Styling Parameters
+We have a collection of the [file URLs](forges.md) for the above.
 
-- `theme` - Theme for the preview ("light", "dark", or empty for default)
-- `css` - URL of a custom CSS file to apply to the preview
+## How it works
 
-### Content Modification Parameters
-
-- `inject_js` - URL of a JavaScript file to inject into the preview
-- `base_path` - Base path for relative URLs in the HTML file
-- `remove_scripts` - Boolean parameter to remove all scripts from the preview (true/false)
-
-### Display Parameters
-
-- `width` - Width of the preview iframe in pixels
-- `height` - Height of the preview iframe in pixels
-- `scale` - Scaling factor for the preview (e.g., 0.5, 1.0, 1.5)
-
-### Caching Parameters
-
-- `cache` - Boolean parameter to enable/disable caching (true/false)
-- `cache_time` - Time in seconds to cache the preview
-
-### Security Parameters
-
-- `sandbox` - Boolean parameter to enable/disable sandbox mode (true/false)
-- `cors_proxy` - Custom CORS proxy URL
+If you try to open raw version of any HTML, CSS or JS file
+in a web browser directly from GitHub,
+all you will see is its source code.
+GitHub forces them to use the "text/plain" content-type,
+so they cannot be interpreted in their native form by the browser.
 
 ## Usage
 
-### Basic Usage
+In order to use it,
+just prepend this fragment to the URL of any HTML file:
+**[https://html-preview.github.io/?url=](https://html-preview.github.io/?url=)**
+e.g.:
 
-To preview an HTML file, simply prepend the URL of this service to the URL of the HTML file:
+- <https://html-preview.github.io/?url=https://github.com/twbs/bootstrap/gh-pages/2.3.2/index.html>
+- <https://html-preview.github.io/?url=https://github.com/documentcloud/backbone/blob/master/examples/todos/index.html>
 
-```
-https://itseyup.github.io/html-preview.github.io/?url=https://github.com/user/repo/blob/master/index.html
-```
+What it does:
 
-### Advanced Usage
+1. Load HTML using [CORS] proxy
+2. Process all links, frames, scripts and styles, and
+3. Load each of them using [CORS] proxy,
+    so they can be evaluated by the browser.
 
-You can combine multiple parameters to customize the preview:
+**Git-Forge HTML Preview** was tested
+under the latest Google Chrome and Mozilla Firefox (**in _2012_**).
 
-```
-https://itseyup.github.io/html-preview.github.io/?url=https://github.com/user/repo/blob/master/index.html&theme=dark&width=800&height=600&remove_scripts=true
-```
-
-## Examples
-
-### Preview with Dark Theme
-
-```
-https://itseyup.github.io/html-preview.github.io/?url=https://github.com/user/repo/blob/master/index.html&theme=dark
-```
-
-### Preview with Custom CSS
-
-```
-https://itseyup.github.io/html-preview.github.io/?url=https://github.com/user/repo/blob/master/index.html&css=https://example.com/custom.css
-```
-
-### Preview with Custom Size
-
-```
-https://itseyup.github.io/html-preview.github.io/?url=https://github.com/user/repo/blob/master/index.html&width=800&height=600
-```
-
-### Preview with Scripts Removed
-
-```
-https://itseyup.github.io/html-preview.github.io/?url=https://github.com/user/repo/blob/master/index.html&remove_scripts=true
-```
-
-## Security Considerations
-
-Please be aware of the following security considerations:
-
-- Freely hosted CORS proxies are a potential security risk
-- If a script stores sensitive data (as cookie, localStorage, etc.), then other repos you open will also have access to this data
-- Don't input sensitive data while previewing
-- Clear all site data after previewing a repo
-
-## License
-
-Apache-2.0 License
+[CORS]: https://httptoolkit.com/blog/cors-proxies/
 
 ## Credits
 

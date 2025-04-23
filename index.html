@@ -1,64 +1,172 @@
 <!DOCTYPE html>
-<!--
-SPDX-FileCopyrightText: 2012 - 2021 Jerzy Głowacki <jerzyglowacki@gmail.com>
-SPDX-FileCopyrightText: 2024 Robin Vobruba <hoijui.quaero@gmail.com>
-
-SPDX-License-Identifier: Apache-2.0
--->
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Git-Forge HTML Preview</title>
-	<style>
-	body {
-		font: 12px 'Helvetica Neue', Helvetica, Arial, freesans, clean, sans-serif;
-		color: #333;
-	}
-	h1 {
-		font-size: 20px;
-	}
-	a {
-		color: #666;
-	}
-	#previewform {
-		display: none;
-		padding: 20px;
-		text-align: center;
-	}
-	strong {
-		color: #333;
-		background-color: #FAFFA6;
-		padding: 0.1em;
-	}
-	#footer {
-		margin: 20px 0;
-		font-size: 10px;
-		color: #666;
-	}
-	</style>
+    <meta charset="utf-8">
+    <title>Enhanced Git-Forge HTML Preview</title>
+    <style>
+        body {
+            font: 12px 'Helvetica Neue', Helvetica, Arial, freesans, clean, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1 {
+            font-size: 20px;
+        }
+        
+        a {
+            color: #666;
+        }
+        
+        strong {
+            color: #333;
+            background-color: #FAFAFA;
+            padding: 0.1em;
+        }
+        
+        #footer {
+            margin: 20px 0;
+            font-size: 10px;
+            color: #666;
+        }
+        
+        #previewform {
+            display: none;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .parameter-section {
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
+        
+        .parameter-section h3 {
+            margin-top: 0;
+        }
+        
+        .form-group {
+            margin: 10px 0;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: inline-block;
+            width: 150px;
+            text-align: right;
+            margin-right: 10px;
+        }
+        
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group input[type="url"],
+        .form-group select {
+            width: 300px;
+            padding: 5px;
+        }
+        
+        .form-group input[type="checkbox"] {
+            margin-left: 160px;
+        }
+        
+        .form-group .checkbox-label {
+            width: auto;
+            margin-left: 5px;
+        }
+        
+        #preview-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: none;
+            z-index: 9999;
+        }
+        
+        #preview-frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: none;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: block;
+        }
+        
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        /* Full page mode styles */
+        body.preview-mode {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        body.preview-mode #previewform {
+            display: none !important;
+        }
+        
+        body.preview-mode #preview-container {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
 </head>
 <body>
-	<form id="previewform" onsubmit="location.href='/?url='+this.file.value;return false">
-		<h1>Git-Forge HTML Preview</h1>
-		<p>
-			<strong>⚠️ WARNING ⚠️</strong>
-			<br>
-			Please read
-			<a href="https://github.com/html-preview/html-preview.github.io/blob/d1478a9f702fb28f1295f371e3c87ba4f1b229c2/README.md">the warnings contained here</a>
-		</p>
-		<p>
-			Enter URL of the HTML file to preview:
-			<input type="url" id="file" value="" placeholder="e.g. https://github.com/user/repo/blob/master/index.html" size="60" autofocus>
-			<input type="submit" value="Preview">
-		</p>
-		<p>
-			or prepend to the URL:
-			<code><strong id="service_base">https://html-preview.github.io/?url=</strong>https://github.com/twbs/bootstrap/blob/gh-pages/2.3.2/index.html</code>
-		</p>
-		<p>
-			Contribute on <a href="https://github.com/html-preview/html-preview.github.io">GitHub</a>
-		</p>
-	</form>
-	<script src="htmlpreview.js"></script>
+    <form id="previewform" onsubmit="location.href='/?'+serializeParameters();return false">
+        <h1>Enhanced Git-Forge HTML Preview</h1>
+        
+        <p>⚠️ WARNING ⚠️</p>
+        <br>
+        <p>Please read <a href="https://github.com/html-preview/html-preview.github.io/blob/d1478a9f702fb28f1295e5c5e6d1c9b9e7a3c7a7/README.md">security warnings</a></p>
+        
+        <div class="parameter-section">
+            <h3>HTML File URL</h3>
+            <div class="form-group">
+                <label for="file">URL:</label>
+                <input type="url" id="file" value="" placeholder="e.g. https://github.com/user/repo/blob/master/index.html">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <input type="submit" value="Preview">
+        </div>
+        
+        <p>or prepend to the URL:</p>
+        <p><code><strong id="service_base">https://itseyup.github.io/html-preview.github.io/?url=</strong></code></p>
+        
+        <p>Contribute on <a href="https://github.com/itseyup/html-preview.github.io">GitHub</a></p>
+    </form>
+    
+    <div id="preview-container"></div>
+    
+    <script src="htmlpreview.js"></script>
+    <script>
+        // Serialize parameters for URL
+        function serializeParameters() {
+            const fileUrl = document.getElementById('file').value.trim();
+            if (!fileUrl) return '';
+            
+            return 'url=' + encodeURIComponent(fileUrl);
+        }
+    </script>
 </body>
 </html>

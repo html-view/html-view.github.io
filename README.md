@@ -1,6 +1,6 @@
 # Enhanced HTML Preview
 
-An enhanced version of the HTML Preview project with support for multiple parameters.
+Enhanced version of the HTML Preview project with support for multiple parameters.
 
 ## Overview
 

@@ -71,8 +71,3 @@ What it does:
 under the latest Google Chrome and Mozilla Firefox (**in _2012_**).
 
 [CORS]: https://httptoolkit.com/blog/cors-proxies/
-
-## Credits
-
-Based on the original [HTML Preview project](https://github.com/html-preview/html-preview.github.io).
-Enhanced version by [itseyup](https://github.com/itseyup).

@@ -54,11 +54,11 @@ so they cannot be interpreted in their native form by the browser.
 
 In order to use it,
 just prepend this fragment to the URL of any HTML file:
-**[https://html-preview.github.io/?url=](https://html-preview.github.io/?url=)**
+**[https://itseyup.github.io/?url=](https://itseyup.github.io/?url=)**
 e.g.:
 
-- <https://html-preview.github.io/?url=https://github.com/twbs/bootstrap/gh-pages/2.3.2/index.html>
-- <https://html-preview.github.io/?url=https://github.com/documentcloud/backbone/blob/master/examples/todos/index.html>
+- <https://itseyup.github.io/?url=https://github.com/twbs/bootstrap/gh-pages/2.3.2/index.html>
+- <https://itseyup.github.io/?url=https://github.com/documentcloud/backbone/blob/master/examples/todos/index.html>
 
 What it does:
 

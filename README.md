@@ -11,6 +11,7 @@ The enhanced version adds support for multiple parameters that allow customizing
 <!--
 SPDX-FileCopyrightText: 2012 - 2021 Jerzy Głowacki <jerzyglowacki@gmail.com>
 SPDX-FileCopyrightText: 2024 Robin Vobruba <hoijui.quaero@gmail.com>
+SPDX-FileCopyrightText: 2025 Eyüp <rise.klani@gmail.com>
 
 SPDX-License-Identifier: Apache-2.0
 -->
@@ -54,11 +55,11 @@ so they cannot be interpreted in their native form by the browser.
 
 In order to use it,
 just prepend this fragment to the URL of any HTML file:
-**[https://itseyup.github.io/?url=](https://itseyup.github.io/?url=)**
+**[https://html-view.github.io/?url=](https://html-view.github.io/?url=)**
 e.g.:
 
-- <https://itseyup.github.io/?url=https://github.com/twbs/bootstrap/gh-pages/2.3.2/index.html>
-- <https://itseyup.github.io/?url=https://github.com/documentcloud/backbone/blob/master/examples/todos/index.html>
+- <https://html-view.github.io/?url=https://github.com/twbs/bootstrap/gh-pages/2.3.2/index.html>
+- <https://html-view.github.io/?url=https://github.com/documentcloud/backbone/blob/master/examples/todos/index.html>
 
 What it does:
 

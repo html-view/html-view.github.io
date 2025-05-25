@@ -11,7 +11,7 @@ The enhanced version adds support for multiple parameters that allow customizing
 <!--
 SPDX-FileCopyrightText: 2012 - 2021 Jerzy Głowacki <jerzyglowacki@gmail.com>
 SPDX-FileCopyrightText: 2024 Robin Vobruba <hoijui.quaero@gmail.com>
-SPDX-FileCopyrightText: 2025 Eyüp <rise.klani@gmail.com>
+SPDX-FileCopyrightText: 2025 Eyüp <rise.klani@gmail.com
 
 SPDX-License-Identifier: Apache-2.0
 -->
